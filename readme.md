@@ -3,6 +3,7 @@
 Install dependcies and download WordPress:
 
 ```
+git clone git@github.com:kamuz/docker-wordpress.git wordpress
 docker-compose up -d
 docker exec -it wordpress_wordpress_1 bash
 ```
