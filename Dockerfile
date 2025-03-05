@@ -33,9 +33,9 @@ RUN groupadd webdev && \
     usermod -aG webdev www-data && \
     usermod -aG webdev root && \
     usermod -aG webdev kamuz && \
-    chown -R :webdev . && \
-    find . -type d -exec chmod 755 {} \;  && \
-    find . -type f -exec chmod 644 {} \;
+    chown -R :webdev /var/www/html && \
+    find /var/www/html -type d -exec chmod 755 {} \;  && \
+    find /var/www/html -type f -exec chmod 644 {} \;
 
 
 # Set the working directory
