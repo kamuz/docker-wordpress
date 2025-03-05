@@ -29,5 +29,13 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
+RUN groupadd webdev && \
+    usermod -aG webdev www-data && \
+    usermod -aG webdev root && \
+    chown -R :webdev . && \
+    find . -type d -exec chmod 755 {} \;  && \
+    find . -type f -exec chmod 644 {} \;
+
+
 # Set the working directory
 WORKDIR /var/www/html
