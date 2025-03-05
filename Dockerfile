@@ -2,7 +2,7 @@
 FROM wordpress:latest
 
 # Set your user name, ex: user=kamuz
-ARG user=yourusername
+ARG user=kamuz
 ARG uid=1000
 
 # Install required packages
