@@ -1,10 +1,6 @@
 # Use the official WordPress image as a base image
 FROM wordpress:latest
 
-# Set your user name, ex: user=kamuz
-ARG user=kamuz
-ARG uid=1000
-
 # Install required packages
 RUN apt-get update && apt-get install -y \
     curl \
@@ -28,15 +24,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
-
-RUN groupadd webdev && \
-    usermod -aG webdev www-data && \
-    usermod -aG webdev root && \
-    usermod -aG webdev kamuz && \
-    chown -R :webdev /var/www/html && \
-    find /var/www/html -type d -exec chmod 755 {} \;  && \
-    find /var/www/html -type f -exec chmod 644 {} \;
-
 
 # Set the working directory
 WORKDIR /var/www/html
