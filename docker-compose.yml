@@ -10,7 +10,8 @@ services:
         ports:
             - '8000:80'
         restart: always
-        volumes: .wordpress_data:/var/www/html
+        volumes:
+            - .wordpress_data:/var/www/html
         environment:
             WORDPRESS_DB_HOST: db:3306
             WORDPRESS_DB_USER: wordpress
