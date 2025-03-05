@@ -1,6 +1,10 @@
 # Use the official WordPress image as a base image
 FROM wordpress:latest
 
+# Set your user name, ex: user=kamuz
+ARG user=yourusername
+ARG uid=1000
+
 # Install required packages
 RUN apt-get update && apt-get install -y \
     curl \
@@ -19,6 +23,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
+
+# Create system user to run Composer and Artisan Commands
+RUN useradd -G www-data,root -u $uid -d /home/$user $user
+RUN mkdir -p /home/$user/.composer && \
+    chown -R $user:$user /home/$user
 
 # Set the working directory
 WORKDIR /var/www/html
