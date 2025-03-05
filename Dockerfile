@@ -32,6 +32,7 @@ RUN mkdir -p /home/$user/.composer && \
 RUN groupadd webdev && \
     usermod -aG webdev www-data && \
     usermod -aG webdev root && \
+    usermod -aG webdev kamuz && \
     chown -R :webdev . && \
     find . -type d -exec chmod 755 {} \;  && \
     find . -type f -exec chmod 644 {} \;
